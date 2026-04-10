@@ -6,7 +6,7 @@ import { Card, CardContent, CardFooter, CardHeader } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { Search, Filter, FileText, ChevronRight, User as UserIcon, Landmark } from "lucide-react";
+import { Search, Filter, FileText, ChevronRight, User as UserIcon, Landmark, Scale } from "lucide-react";
 
 export default function Dashboard() {
   const { user } = useAuth();
