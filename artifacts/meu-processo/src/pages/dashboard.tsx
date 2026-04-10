@@ -1,12 +1,12 @@
 import { useState, useMemo } from "react";
 import { useAuth } from "@/context/AuthContext";
-import { mockProcessos } from "@/lib/mockData";
+import { mockProcessos, mockUsers } from "@/lib/mockData";
 import { Link } from "wouter";
 import { Card, CardContent, CardFooter, CardHeader } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { Search, Filter, FileText, ChevronRight, User as UserIcon, Landmark, Scale } from "lucide-react";
+import { Search, Filter, FileText, ChevronRight, User as UserIcon, Landmark, Scale, ShieldCheck, Users, BriefcaseBusiness } from "lucide-react";
 
 export default function Dashboard() {
   const { user } = useAuth();
@@ -21,7 +21,7 @@ export default function Dashboard() {
     // Filter by role
     if (user.perfil === "CLIENTE") {
       filtered = filtered.filter(p => p.clienteId === user.id);
-    } else {
+    } else if (user.perfil === "ADVOGADO") {
       filtered = filtered.filter(p => p.advogadoId === user.id);
     }
     
@@ -60,14 +60,25 @@ export default function Dashboard() {
     }
   };
 
+  const statusSummary = mockProcessos.reduce<Record<string, number>>((acc, processo) => {
+    acc[processo.status] = (acc[processo.status] || 0) + 1;
+    return acc;
+  }, {});
+
+  const isAdmin = user?.perfil === "ADMINISTRADOR";
+
   return (
     <div className="min-h-[calc(100vh-4rem)] bg-fundo py-8">
       <div className="container mx-auto px-4 max-w-5xl">
         <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-8 gap-4">
           <div>
-            <h1 className="text-3xl font-serif font-bold text-primaria mb-2">Meus Processos</h1>
+            <h1 className="text-3xl font-serif font-bold text-primaria mb-2">
+              {isAdmin ? "Painel do Administrador" : "Meus Processos"}
+            </h1>
             <p className="text-muted-foreground">
-              {user?.perfil === "ADVOGADO" 
+              {isAdmin
+                ? "Gerencie a visão geral do sistema, processos e usuários cadastrados."
+                : user?.perfil === "ADVOGADO" 
                 ? "Acompanhe o andamento das ações do seu escritório." 
                 : "Acompanhe o andamento das suas questões jurídicas."}
             </p>
@@ -90,6 +101,44 @@ export default function Dashboard() {
             </Button>
           </div>
         </div>
+
+        {isAdmin && (
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
+            <Card className="border-borda bg-white">
+              <CardContent className="p-5 flex items-center gap-4">
+                <div className="h-12 w-12 rounded-lg bg-primaria/10 flex items-center justify-center">
+                  <BriefcaseBusiness className="h-6 w-6 text-primaria" />
+                </div>
+                <div>
+                  <p className="text-sm text-muted-foreground">Processos cadastrados</p>
+                  <p className="text-2xl font-bold text-primaria" data-testid="text-total-processos">{mockProcessos.length}</p>
+                </div>
+              </CardContent>
+            </Card>
+            <Card className="border-borda bg-white">
+              <CardContent className="p-5 flex items-center gap-4">
+                <div className="h-12 w-12 rounded-lg bg-secundaria/15 flex items-center justify-center">
+                  <Users className="h-6 w-6 text-secundaria" />
+                </div>
+                <div>
+                  <p className="text-sm text-muted-foreground">Usuários cadastrados</p>
+                  <p className="text-2xl font-bold text-primaria" data-testid="text-total-usuarios">{mockUsers.length}</p>
+                </div>
+              </CardContent>
+            </Card>
+            <Card className="border-borda bg-white">
+              <CardContent className="p-5 flex items-center gap-4">
+                <div className="h-12 w-12 rounded-lg bg-green-100 flex items-center justify-center">
+                  <ShieldCheck className="h-6 w-6 text-green-700" />
+                </div>
+                <div>
+                  <p className="text-sm text-muted-foreground">Processos em andamento</p>
+                  <p className="text-2xl font-bold text-primaria" data-testid="text-processos-andamento">{statusSummary["Em Andamento"] || 0}</p>
+                </div>
+              </CardContent>
+            </Card>
+          </div>
+        )}
 
         {filteredProcessos.length === 0 ? (
           <div className="bg-white rounded-lg border border-borda p-12 text-center flex flex-col items-center">

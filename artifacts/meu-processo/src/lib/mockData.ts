@@ -1,4 +1,4 @@
-export type Perfil = "ADVOGADO" | "CLIENTE";
+export type Perfil = "ADMINISTRADOR" | "ADVOGADO" | "CLIENTE";
 
 export interface User {
   id: string;
@@ -6,6 +6,7 @@ export interface User {
   email: string;
   perfil: Perfil;
   oab?: string;
+  senha?: string;
 }
 
 export interface Processo {
@@ -35,6 +36,13 @@ export interface Movimentacao {
 }
 
 export const mockUsers: User[] = [
+  {
+    id: "0",
+    nome: "Administrador do Sistema",
+    email: "admin@sistema.com",
+    perfil: "ADMINISTRADOR",
+    senha: "admin123",
+  },
   {
     id: "1",
     nome: "Dr. Carlos Mendes",

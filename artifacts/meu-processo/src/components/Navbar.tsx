@@ -9,6 +9,12 @@ export function Navbar() {
 
   if (!user) return null;
 
+  const perfilLabel = user.perfil === "ADMINISTRADOR"
+    ? "Administrador"
+    : user.perfil === "ADVOGADO"
+      ? user.oab
+      : "Cliente";
+
   return (
     <header className="bg-primaria text-primaria-foreground shadow-md sticky top-0 z-10 border-b-2 border-secundaria">
       <div className="container mx-auto px-4 h-16 flex items-center justify-between">
@@ -25,7 +31,7 @@ export function Navbar() {
             <UserIcon className="h-4 w-4" />
             <div className="flex flex-col items-start leading-none">
               <span className="font-medium text-white">{user.nome}</span>
-              <span className="text-xs">{user.perfil === "ADVOGADO" ? user.oab : "Cliente"}</span>
+              <span className="text-xs">{perfilLabel}</span>
             </div>
           </div>
           <Button 

@@ -7,10 +7,11 @@ import { Label } from "@/components/ui/label";
 import { Scale, ChevronRight } from "lucide-react";
 
 export default function Login() {
-  const { user, login } = useAuth();
+  const { user, login, loginWithCredentials } = useAuth();
   const [, setLocation] = useLocation();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
 
   useEffect(() => {
     if (user) {
@@ -20,8 +21,11 @@ export default function Login() {
 
   const handleLogin = (e: React.FormEvent) => {
     e.preventDefault();
-    // Simulate login for client by default if typing anything
-    login("CLIENTE");
+    const success = loginWithCredentials(email, password);
+
+    if (!success) {
+      setError("E-mail ou senha inválidos. Para administrador, use admin@sistema.com e admin123.");
+    }
   };
 
   return (
@@ -62,8 +66,13 @@ export default function Login() {
                   type="email" 
                   placeholder="seu@email.com" 
                   value={email}
-                  onChange={(e) => setEmail(e.target.value)}
+                  onChange={(e) => {
+                    setEmail(e.target.value);
+                    setError("");
+                  }}
                   className="border-borda focus-visible:ring-secundaria"
+                  autoComplete="email"
+                  data-testid="input-email"
                 />
               </div>
               <div className="space-y-2">
@@ -76,13 +85,24 @@ export default function Login() {
                   type="password" 
                   placeholder="••••••••" 
                   value={password}
-                  onChange={(e) => setPassword(e.target.value)}
+                  onChange={(e) => {
+                    setPassword(e.target.value);
+                    setError("");
+                  }}
                   className="border-borda focus-visible:ring-secundaria"
+                  autoComplete="current-password"
+                  data-testid="input-password"
                 />
               </div>
             </div>
 
-            <Button type="submit" className="w-full bg-primaria hover:bg-primaria/90 text-white py-6 text-lg">
+            {error && (
+              <div className="rounded-md border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700" data-testid="text-login-error">
+                {error}
+              </div>
+            )}
+
+            <Button type="submit" className="w-full bg-primaria hover:bg-primaria/90 text-white py-6 text-lg" data-testid="button-login">
               Entrar <ChevronRight className="ml-2 h-5 w-5" />
             </Button>
           </form>
@@ -94,6 +114,7 @@ export default function Login() {
                 variant="outline" 
                 onClick={() => login("ADVOGADO")}
                 className="border-secundaria/50 hover:bg-secundaria/10 text-primaria"
+                data-testid="button-demo-advogado"
               >
                 Perfil Advogado
               </Button>
@@ -101,6 +122,7 @@ export default function Login() {
                 variant="outline" 
                 onClick={() => login("CLIENTE")}
                 className="border-secundaria/50 hover:bg-secundaria/10 text-primaria"
+                data-testid="button-demo-cliente"
               >
                 Perfil Cliente
               </Button>

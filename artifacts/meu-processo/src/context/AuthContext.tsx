@@ -4,6 +4,7 @@ import { User, mockUsers } from "@/lib/mockData";
 interface AuthContextType {
   user: User | null;
   login: (perfil: "ADVOGADO" | "CLIENTE") => void;
+  loginWithCredentials: (email: string, senha: string) => boolean;
   logout: () => void;
 }
 
@@ -27,13 +28,29 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     }
   };
 
+  const loginWithCredentials = (email: string, senha: string) => {
+    const selectedUser = mockUsers.find(
+      (u) =>
+        u.email.toLowerCase() === email.trim().toLowerCase() &&
+        u.senha === senha,
+    );
+
+    if (!selectedUser) {
+      return false;
+    }
+
+    setUser(selectedUser);
+    localStorage.setItem("meu-processo-user", JSON.stringify(selectedUser));
+    return true;
+  };
+
   const logout = () => {
     setUser(null);
     localStorage.removeItem("meu-processo-user");
   };
 
   return (
-    <AuthContext.Provider value={{ user, login, logout }}>
+    <AuthContext.Provider value={{ user, login, loginWithCredentials, logout }}>
       {children}
     </AuthContext.Provider>
   );

@@ -20,6 +20,12 @@ MEUPROCESSO is a Brazilian lawtech platform that makes judicial proceedings unde
 
 This is a **frontend-only** application with mock data. The Java Spring Boot backend (described in attached PDF) is external and not running in this workspace. All data is hardcoded in `artifacts/meu-processo/src/lib/mockData.ts`.
 
+## Demo Access
+
+- **Administrador**: use the normal login form with email `admin@sistema.com` and password `admin123`
+- **Advogado**: use the quick demo button "Perfil Advogado"
+- **Cliente**: use the quick demo button "Perfil Cliente"
+
 ## Color Palette
 
 - **Primaria** (#1C2E4A): Dark blue - navbars, headers, prominent text
@@ -32,8 +38,8 @@ Custom Tailwind classes: `bg-primaria`, `bg-secundaria`, `bg-fundo`, `bg-borda`,
 
 ## Pages
 
-1. **Login** (`/`) - Mock authentication with demo accounts (Advogado/Cliente roles)
-2. **Dashboard** (`/dashboard`) - Process listing with search/filter, role-based filtering
+1. **Login** (`/`) - Mock authentication with admin credentials and demo buttons for Advogado/Cliente roles
+2. **Dashboard** (`/dashboard`) - Role-aware dashboard; admin sees system overview and all processes, lawyer/client see their filtered processes
 3. **Process Details** (`/processo/:id`) - Core screen with timeline showing original legal text vs AI-translated plain language
 
 ## Key Files
