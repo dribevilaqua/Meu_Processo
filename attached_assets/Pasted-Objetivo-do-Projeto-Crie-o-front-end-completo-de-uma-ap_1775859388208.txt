@@ -1,0 +1,25 @@
+Objetivo do Projeto: Crie o front-end completo de uma aplicação web chamada MEUPROCESSO. É um sistema do setor de Lawtechs (tecnologia jurídica) focado em facilitar o entendimento de processos judiciais para clientes leigos. O back-end em Java (Spring Boot) já está anexado neste projeto e NÃO deve ser alterado. Sua função é configurar o ambiente front-end, integrá-lo (ou simular a integração) e construir a interface.
+Stack Tecnológico:
+    • React com Vite
+    • Tailwind CSS para estilização
+    • React Router para navegação
+    • Axios para chamadas de API
+Identidade Visual (Paleta de Cores): Configure o tailwind.config.js estritamente com as seguintes cores:
+    • primaria: #1C2E4A (Azul Escuro - usar em navbars, cabeçalhos e textos de destaque)
+    • secundaria: #D4AF37 (Dourado - usar em botões principais, ícones e alertas)
+    • fundo: #FDF5E6 (Bege/Off-White - usar no background principal das telas para conforto visual)
+    • borda: #E0E0E0 (Cinza - para divisórias e bordas de cards)
+    • branco: #FFFFFF (Branco - usar no fundo de cards e modais)
+Telas e Requisitos de Interface:
+    1. Tela de Login: Autenticação simples (pode mokar o login para fins de demonstração, simulando um login de "Advogado" ou "Cliente").
+    2. Dashboard de Processos (Listagem): Uma tela com cards ou uma tabela limpa exibindo os processos (Número, Título, Status). Deve ter um botão "Ver Detalhes".
+    3. Tela de Detalhes do Processo (O Core do Sistema): * Esta tela mostrará os dados do processo e a linha do tempo de Movimentações.
+        ◦ REQUISITO CRÍTICO DE MOCK: O sistema propõe o uso de IA para traduzir o "juridiquês". Como a integração real com IA não existe ainda e o backend possui apenas um campo padrão de descrição, você deve MOKAR (hardcode no front-end) a exibição dessas movimentações.
+        ◦ Para cada movimentação na linha do tempo, a interface deve exibir obrigatoriamente dois blocos visuais distintos:
+            ▪ "Texto Original (Tribunal)": Exibindo jargão jurídico complexo (Ex: "Autos conclusos para prolação de sentença").
+            ▪ "Texto Traduzido por IA": Destacado visualmente (talvez com um ícone brilhante ou borda dourada), exibindo a explicação simples (Ex: "O processo está com o juiz para a decisão final").
+        ◦ Crie um array de dados fictícios (mockData) rico e realista no front-end para alimentar essa tela de detalhes, demonstrando claramente a diferença entre o texto original e a tradução simplificada pela IA.
+Instruções Finais de Execução:
+    • Priorize uma interface limpa, responsiva (mobile-first) e que transmita a seriedade de um sistema jurídico moderno.
+    • Crie a estrutura de pastas do React (src/components, src/pages, src/services).
+    • Execute os comandos necessários para inicializar o Vite e instalar as dependências antes de gerar o código.

@@ -1,0 +1,31 @@
+kind = "web"
+previewPath = "/"
+title = "MEUPROCESSO"
+version = "1.0.0"
+id = "artifacts/meu-processo"
+router = "path"
+
+[[integratedSkills]]
+name = "react-vite"
+version = "1.0.0"
+
+[[services]]
+name = "web"
+paths = [ "/" ]
+localPort = 23203
+
+[services.development]
+run = "pnpm --filter @workspace/meu-processo run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/meu-processo", "run", "build" ]
+publicDir = "artifacts/meu-processo/dist/public"
+serve = "static"
+
+[[services.production.rewrites]]
+from = "/*"
+to = "/index.html"
+
+[services.env]
+PORT = "23203"
+BASE_PATH = "/"
