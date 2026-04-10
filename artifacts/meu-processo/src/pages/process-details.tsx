@@ -1,6 +1,6 @@
 import { useMemo } from "react";
 import { useParams, Link } from "wouter";
-import { mockProcessos, mockMovimentacoes } from "@/lib/mockData";
+import { useData } from "@/context/DataContext";
 import { useAuth } from "@/context/AuthContext";
 import { format } from "date-fns";
 import { ptBR } from "date-fns/locale";
@@ -23,13 +23,14 @@ import { Separator } from "@/components/ui/separator";
 export default function ProcessDetails() {
   const { id } = useParams();
   const { user } = useAuth();
+  const { processos, movimentacoes: allMovimentacoes } = useData();
   
-  const processo = useMemo(() => mockProcessos.find(p => p.id === id), [id]);
+  const processo = useMemo(() => processos.find(p => p.id === id), [processos, id]);
   const movimentacoes = useMemo(() => {
-    return mockMovimentacoes
+    return allMovimentacoes
       .filter(m => m.processoId === id)
       .sort((a, b) => new Date(b.data).getTime() - new Date(a.data).getTime());
-  }, [id]);
+  }, [allMovimentacoes, id]);
 
   if (!processo) {
     return (

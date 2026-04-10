@@ -7,6 +7,9 @@ export interface User {
   perfil: Perfil;
   oab?: string;
   senha?: string;
+  cpf?: string;
+  cargo?: string;
+  whatsapp?: string;
 }
 
 export interface Processo {
