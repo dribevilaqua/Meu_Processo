@@ -24,7 +24,7 @@ export default function Login() {
     const success = loginWithCredentials(email, password);
 
     if (!success) {
-      setError("E-mail ou senha inválidos. Para administrador, use admin@sistema.com e admin123.");
+      setError("E-mail ou senha inválidos.");
     }
   };
 

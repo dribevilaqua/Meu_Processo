@@ -27,8 +27,6 @@ const emptyProcessForm = {
   descricao: "",
   vara: "",
   tribunal: "",
-  autor: "",
-  reu: "",
   advogadoId: "",
   clienteId: "",
 };
@@ -95,16 +93,21 @@ export default function Dashboard() {
     event.preventDefault();
     if (!userForm.nome || !userForm.email) return;
 
-    createUsuario({
+    const userData: any = {
       nome: userForm.nome,
       email: userForm.email,
       senha: userForm.senha || "123456",
       perfil: userForm.perfil,
-      cpf: userForm.cpf,
-      cargo: userForm.cargo,
-      oab: userForm.perfil === "ADVOGADO" ? userForm.oab : undefined,
       whatsapp: userForm.whatsapp,
-    });
+    };
+
+    if (userForm.perfil === "CLIENTE") {
+      userData.cpf = userForm.cpf;
+    } else if (userForm.perfil === "ADVOGADO") {
+      userData.oab = userForm.oab;
+    }
+
+    createUsuario(userData);
     setUserForm(emptyUserForm);
   };
 
@@ -180,8 +183,8 @@ export default function Dashboard() {
                     <Users className="h-6 w-6 text-secundaria" />
                   </div>
                   <div>
-                    <p className="text-sm text-muted-foreground">Usuários</p>
-                    <p className="text-2xl font-bold text-primaria" data-testid="text-total-usuarios">{usuarios.length}</p>
+                    <p className="text-sm text-muted-foreground">Advogados</p>
+                    <p className="text-2xl font-bold text-primaria" data-testid="text-total-usuarios">{advogados.length}</p>
                   </div>
                 </CardContent>
               </Card>
@@ -226,8 +229,9 @@ export default function Dashboard() {
                       <option value="CLIENTE">Cliente</option>
                       <option value="ADVOGADO">Advogado</option>
                     </select>
-                    <Input placeholder="CPF" value={userForm.cpf} onChange={(event) => setUserForm({ ...userForm, cpf: event.target.value })} data-testid="input-usuario-cpf" />
-                    <Input placeholder="Cargo" value={userForm.cargo} onChange={(event) => setUserForm({ ...userForm, cargo: event.target.value })} data-testid="input-usuario-cargo" />
+                    {userForm.perfil === "CLIENTE" && (
+                      <Input placeholder="CPF" value={userForm.cpf} onChange={(event) => setUserForm({ ...userForm, cpf: event.target.value })} data-testid="input-usuario-cpf" />
+                    )}
                     {userForm.perfil === "ADVOGADO" && (
                       <Input placeholder="OAB" value={userForm.oab} onChange={(event) => setUserForm({ ...userForm, oab: event.target.value })} data-testid="input-usuario-oab" />
                     )}
@@ -258,8 +262,6 @@ export default function Dashboard() {
                     <textarea className="min-h-20 w-full rounded-md border border-borda bg-white px-3 py-2 text-sm" placeholder="Descrição" value={processForm.descricao} onChange={(event) => setProcessForm({ ...processForm, descricao: event.target.value })} data-testid="textarea-processo-descricao" />
                     <Input placeholder="Vara" value={processForm.vara} onChange={(event) => setProcessForm({ ...processForm, vara: event.target.value })} data-testid="input-processo-vara" />
                     <Input placeholder="Tribunal" value={processForm.tribunal} onChange={(event) => setProcessForm({ ...processForm, tribunal: event.target.value })} data-testid="input-processo-tribunal" />
-                    <Input placeholder="Autor" value={processForm.autor} onChange={(event) => setProcessForm({ ...processForm, autor: event.target.value })} data-testid="input-processo-autor" />
-                    <Input placeholder="Réu" value={processForm.reu} onChange={(event) => setProcessForm({ ...processForm, reu: event.target.value })} data-testid="input-processo-reu" />
                     <select className="w-full h-10 rounded-md border border-borda bg-white px-3 text-sm" value={processForm.advogadoId} onChange={(event) => setProcessForm({ ...processForm, advogadoId: event.target.value })} data-testid="select-processo-advogado">
                       <option value="">Selecione o advogado</option>
                       {advogados.map((advogado) => <option key={advogado.id} value={advogado.id}>{advogado.nome}</option>)}

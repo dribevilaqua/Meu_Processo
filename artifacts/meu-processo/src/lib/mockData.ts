@@ -20,8 +20,6 @@ export interface Processo {
   descricao: string;
   vara: string;
   tribunal: string;
-  autor: string;
-  reu: string;
   advogadoId: string;
   clienteId: string;
   advogadoNome: string;
@@ -70,8 +68,6 @@ export const mockProcessos: Processo[] = [
     descricao: "Ação movida contra a companhia de energia elétrica por cortes recorrentes e queima de aparelhos.",
     vara: "3ª Vara Cível",
     tribunal: "TJSP - Foro Central Cível",
-    autor: "Maria Silva",
-    reu: "Companhia Paulista de Energia S.A.",
     advogadoId: "1",
     clienteId: "2",
     advogadoNome: "Dr. Carlos Mendes",
@@ -86,8 +82,6 @@ export const mockProcessos: Processo[] = [
     descricao: "Revisão de juros abusivos em financiamento de veículo.",
     vara: "5ª Vara Cível",
     tribunal: "TJSP - Foro Central Cível",
-    autor: "Maria Silva",
-    reu: "Banco Financeiro do Brasil S.A.",
     advogadoId: "1",
     clienteId: "2",
     advogadoNome: "Dr. Carlos Mendes",
@@ -102,8 +96,6 @@ export const mockProcessos: Processo[] = [
     descricao: "Ação de divórcio com partilha de bens e definição de guarda.",
     vara: "2ª Vara da Família e Sucessões",
     tribunal: "TJSP - Foro Regional II Santo Amaro",
-    autor: "João Almeida",
-    reu: "Ana Souza",
     advogadoId: "1",
     clienteId: "3", // Other client
     advogadoNome: "Dr. Carlos Mendes",
@@ -118,8 +110,6 @@ export const mockProcessos: Processo[] = [
     descricao: "Despejo por falta de pagamento de aluguéis e encargos locatícios.",
     vara: "10ª Vara Cível",
     tribunal: "TJSP - Foro Central Cível",
-    autor: "Imobiliária Morar Bem Ltda.",
-    reu: "Maria Silva",
     advogadoId: "1",
     clienteId: "2",
     advogadoNome: "Dr. Carlos Mendes",
@@ -134,8 +124,6 @@ export const mockProcessos: Processo[] = [
     descricao: "Reclamação trabalhista pleiteando horas extras não pagas e verbas rescisórias.",
     vara: "15ª Vara do Trabalho de São Paulo",
     tribunal: "TRT-2 - São Paulo",
-    autor: "Roberto Ferreira",
-    reu: "Construtora Silva & Filhos",
     advogadoId: "1",
     clienteId: "4",
     advogadoNome: "Dr. Carlos Mendes",

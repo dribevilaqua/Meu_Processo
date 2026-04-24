@@ -104,14 +104,10 @@ export default function ProcessDetails() {
             </div>
           </div>
           
-          <div className="grid grid-cols-1 md:grid-cols-3 divide-y md:divide-y-0 md:divide-x divide-borda">
+          <div className="grid grid-cols-1 md:grid-cols-2 divide-y md:divide-y-0 md:divide-x divide-borda">
             <div className="p-4 md:p-6">
-              <p className="text-xs text-muted-foreground uppercase font-semibold tracking-wider mb-1">Autor</p>
-              <p className="font-medium text-foreground">{processo.autor}</p>
-            </div>
-            <div className="p-4 md:p-6">
-              <p className="text-xs text-muted-foreground uppercase font-semibold tracking-wider mb-1">Réu</p>
-              <p className="font-medium text-foreground">{processo.reu}</p>
+              <p className="text-xs text-muted-foreground uppercase font-semibold tracking-wider mb-1">Cliente</p>
+              <p className="font-medium text-foreground">{processo.clienteNome}</p>
             </div>
             <div className="p-4 md:p-6">
               <p className="text-xs text-muted-foreground uppercase font-semibold tracking-wider mb-1">Advogado</p>
