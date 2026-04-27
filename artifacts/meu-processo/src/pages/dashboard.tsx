@@ -205,8 +205,8 @@ export default function Dashboard() {
                     <ShieldCheck className="h-6 w-6 text-green-700" />
                   </div>
                   <div>
-                    <p className="text-sm text-muted-foreground">Em andamento</p>
-                    <p className="text-2xl font-bold text-primaria" data-testid="text-processos-andamento">{statusSummary["Em Andamento"] || 0}</p>
+                    <p className="text-sm text-muted-foreground">Processos ativos</p>
+                    <p className="text-2xl font-bold text-primaria" data-testid="text-processos-andamento">{processos.length - (statusSummary["Arquivado"] || 0)}</p>
                   </div>
                 </CardContent>
               </Card>

@@ -44,7 +44,7 @@ export default function Login() {
             MEU<span className="text-secundaria">PROCESSO</span>
           </h1>
           <p className="text-white/80 text-lg max-w-md font-sans">
-            Acompanhe o andamento das suas questões jurídicas de forma clara, simples e transparente.
+            Acompanhe o andamento das suas ações jurídicas de forma clara, simples e transparente.
           </p>
         </div>
       </div>
