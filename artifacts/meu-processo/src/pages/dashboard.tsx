@@ -279,7 +279,7 @@ export default function Dashboard() {
                 <CardHeader>
                   <h2 className="text-xl font-serif font-bold text-primaria flex items-center gap-2">
                     <Activity className="h-5 w-5 text-secundaria" />
-                    Cadastrar movimentação
+                    Integração com e-SAJ
                   </h2>
                 </CardHeader>
                 <CardContent>
